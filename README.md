@@ -1,1 +1,1 @@
-# IMR_Project
+# Tomb of the Mind
