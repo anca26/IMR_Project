@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Project/Scenes/RoomsScene.unity
+    guid: a7316c6adf1542046b2f31a7f97ee694
+  - enabled: 1
+    path: Assets/Project/Scenes/BeesScene.unity
+    guid: 57475d3301f7ff94f815874347477789
+  - enabled: 1
+    path: Assets/Project/Scenes/SpiderScene.unity
+    guid: 3f53d6eda75fedc49981c205d1366831
   m_configObjects: {}

@@ -12,7 +12,9 @@ public class MoveHead : MonoBehaviour
     {
         float rotateHorizontal = Input.GetAxis("Mouse X");
         float rotateVertical = Input.GetAxis("Mouse Y");
-        transform.Rotate(transform.up * rotateHorizontal * sensitivity); 
-        transform.Rotate(-transform.right * rotateVertical * sensitivity);
+        
+        transform.Rotate( Vector3.up    * rotateHorizontal * sensitivity); 
+        transform.Rotate(-Vector3.right * rotateVertical   * sensitivity);
+        
     }
 }
