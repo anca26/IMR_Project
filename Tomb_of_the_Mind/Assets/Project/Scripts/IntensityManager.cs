@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[ExecuteAlways]
     public class IntensityManager : MonoBehaviour
 {
     public static IntensityManager instance = null;
@@ -57,7 +56,6 @@ using UnityEngine.SceneManagement;
     }
     public void ManageSubScenes()
     {
-
         for(int i = 0; i < _subscenes.Count; i++)
         {
             _subscenes[i] = null;

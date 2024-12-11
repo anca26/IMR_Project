@@ -5,15 +5,17 @@ using UnityEngine.Rendering;
 
 public class PlayerLogic : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("AdvanceIntensity"))
+        if (other.gameObject.CompareTag("AdvanceIntensity"))
         {
             IntensityManager.instance.IncrementIntensity(1);
         }
-        else if (collision.collider.CompareTag("ExitPhobia"))
+        else if (other.gameObject.CompareTag("ExitPhobia"))
         {
             IntensityManager.instance.ExitPhobia();
         }
+        
     }
+  
 }
