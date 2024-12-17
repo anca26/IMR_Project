@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[UnityEditor.CustomEditor(typeof(SubsceneManager))]
+[UnityEditor.CustomEditor(typeof(IntensityManager))]
 public class IntensityEditor : Editor
 {
-    private SubsceneManager _target;
+    private IntensityManager _target;
 
     private void OnEnable()
     {
-        _target = (SubsceneManager)target;
+        _target = (IntensityManager)target;
     }
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Prepare"))
+        if(GUILayout.Button("Add Events | Sort"))
         {
-            _target.ManageSubScenes();
+            _target.AddEventChildren();
         }
     }
 }

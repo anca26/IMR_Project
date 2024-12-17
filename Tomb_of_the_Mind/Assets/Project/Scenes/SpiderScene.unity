@@ -5111,6 +5111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143971980}
+  - component: {fileID: 143971981}
   m_Layer: 0
   m_Name: intensity1
   m_TagString: Untagged
@@ -5133,8 +5134,28 @@ Transform:
   m_Children:
   - {fileID: 664583147}
   - {fileID: 1688306310}
+  - {fileID: 594750329}
   m_Father: {fileID: 1324034851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143971981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143971979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d6f05ecb15e3245968453249ebe555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intensityEvents:
+  - Name: awd
+    instance: {fileID: 594750330}
+    StartDelay: 0
+    InfiniteTriggers: 0
+    TriggerCount: 0
+    TriggerDelay: 0
 --- !u!1 &144086184
 GameObject:
   m_ObjectHideFlags: 0
@@ -25609,6 +25630,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588712587}
   m_Mesh: {fileID: -4550125092169740112, guid: ad3119cbd6dce024e8460ef32dec49df, type: 3}
+--- !u!1 &594750328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594750329}
+  - component: {fileID: 594750330}
+  m_Layer: 0
+  m_Name: AAAA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &594750329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594750328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 143971980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594750330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594750328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b8e1f622317d040a296f30a5944adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &594900958
 GameObject:
   m_ObjectHideFlags: 0
