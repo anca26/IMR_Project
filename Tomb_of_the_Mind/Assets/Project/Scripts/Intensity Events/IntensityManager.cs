@@ -29,7 +29,7 @@ public class IntensityManager : MonoBehaviour
             TriggerCount = 0;
             TriggerDelay = 0;
 
-            Found = false;
+            Found = true;
         }
 
         public int CompareTo(EventInterface other)
