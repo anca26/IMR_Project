@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,16 @@ using UnityEngine.SceneManagement;
 
         _subscenes[_currentSubScene].SetActive(true);  // enabling new intensity subscene
     }
+    private GameObject CreateChild(Transform parent, string name)
+    {
+        GameObject child = new GameObject();
+        child.transform.parent = parent;
+        child.name = name;
+
+        child.AddComponent<IntensityManager>();
+
+        return child;
+    }
     public void ManageSubScenes()
     {
         for(int i = 0; i < _subscenes.Count; i++)
@@ -68,19 +79,13 @@ using UnityEngine.SceneManagement;
                 Transform obj = i < gameObject.transform.childCount ? gameObject.transform.GetChild(i) : null;
                 if (obj == null) // there is no child
                 {
-                    _subscenes[i] = new GameObject();
-                    _subscenes[i].transform.parent = gameObject.transform;
-
-                    _subscenes[i].name = name;
+                    _subscenes[i] = CreateChild(gameObject.transform, name);
                 }
                 else
                 {
                     if (obj.gameObject.name != name) // if the object found does not have the name of the subscene, we create the subscene and add it
                     {
-                        _subscenes[i] = new GameObject();
-                        _subscenes[i].transform.parent = gameObject.transform;
-
-                        _subscenes[i].name = name;
+                        _subscenes[i] = CreateChild(gameObject.transform, name);
                     }
                     else
                     {

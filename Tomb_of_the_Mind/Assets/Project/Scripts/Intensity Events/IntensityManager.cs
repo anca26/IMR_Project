@@ -18,6 +18,9 @@ public class IntensityManager : MonoBehaviour
         public int   TriggerCount;
         public float TriggerDelay;
 
+
+        [HideInInspector]
+        public bool Found;
         public EventInterface(IntensityEvent inst, string name)
         {
             instance = inst;
@@ -25,6 +28,8 @@ public class IntensityManager : MonoBehaviour
             InfiniteTriggers = false;
             TriggerCount = 0;
             TriggerDelay = 0;
+
+            Found = false;
         }
 
         public int CompareTo(EventInterface other)
@@ -64,8 +69,16 @@ public class IntensityManager : MonoBehaviour
     public void AddEventChildren()
     {
         IntensityEvent[] events = transform.GetComponentsInChildren<IntensityEvent>();
+
+        for (int i = 0; i < _intensityEvents.Count; ++i)
+        {
+            var elem = _intensityEvents[i];
+            elem.Found = false;
+        }
+
         foreach (var ev in events)
         {
+            
             if (_intensityEvents.Exists(evi => evi.instance == ev) == true)
             {
                 EventInterface a = _intensityEvents.Find(evi => evi.instance == ev);
@@ -75,6 +88,15 @@ public class IntensityManager : MonoBehaviour
                 _intensityEvents.Add(new EventInterface(ev, ev.gameObject.name));
             }
             
+        }
+        for (int i = 0; i < _intensityEvents.Count; ++i)
+        {
+            var elem = _intensityEvents[i];
+            if (elem.Found == false)
+            {
+                _intensityEvents.Remove(elem);
+                --i;
+            }
         }
         Order();
 
