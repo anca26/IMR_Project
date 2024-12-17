@@ -20,11 +20,18 @@ public abstract class IntensityEvent : MonoBehaviour
     private float _nextTriggerTime;
     private int _remainingTriggers;
 
+    /*
+     * Function called by the IntensityManager.
+     * Its purpose is to prepare the event for triggering.
+     */
     public void Prepare()
     {
         this._nextTriggerTime = Time.time + StartDelay;
         this._remainingTriggers = InfiniteTriggers ? 999999 : TriggerCount;
     }
+    /*
+     * This is the function that is called in the loop of the IntensityManager.
+     */
     public void TriggerEvent()
     {
         if(_remainingTriggers != 0)
@@ -41,6 +48,12 @@ public abstract class IntensityEvent : MonoBehaviour
         }
     }
 
+    /*
+     * This is the abstract function, specific for each type of event. Imagine it as a one time thing.
+     * For example, for a sound effect, the trigger function could make a sound play.
+     * For animation, it could also make it play, or start a chain of animations.
+     * For an entity that must move randomly, it could make it active.
+     */
     public abstract void Trigger();
 
 

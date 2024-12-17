@@ -38,17 +38,19 @@ public class IntensityManager : MonoBehaviour
         }
     }
 
-    
-
+    /// <summary>
+    /// Initializez all the events.
+    /// </summary>
     private void Awake()
     {
-
         foreach (EventInterface intensityEvent in this._intensityEvents)
         {
             InitEvent(intensityEvent);
         }
     }
-
+    /// <summary>
+    /// TRIES to trigger each event every frame.
+    /// </summary>
     private void Update()
     {
        foreach(EventInterface intensityEvent in this._intensityEvents)
@@ -66,6 +68,8 @@ public class IntensityManager : MonoBehaviour
         ev.instance.Prepare();
     }
 
+
+    //  === INTENSITY EDITOR FUNCTION ===
     public void AddEventChildren()
     {
         IntensityEvent[] events = transform.GetComponentsInChildren<IntensityEvent>();
@@ -101,6 +105,7 @@ public class IntensityManager : MonoBehaviour
         Order();
 
     }
+    //  === INTENSITY EDITOR FUNCTION ===
     public void Order()
     {
         _intensityEvents.Sort();
