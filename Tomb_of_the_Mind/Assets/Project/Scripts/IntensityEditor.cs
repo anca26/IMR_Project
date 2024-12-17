@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[UnityEditor.CustomEditor(typeof(IntensityManager))]
+[UnityEditor.CustomEditor(typeof(SubsceneManager))]
 public class IntensityEditor : Editor
 {
-    private IntensityManager _target;
+    private SubsceneManager _target;
 
     private void OnEnable()
     {
-        _target = (IntensityManager)target;
+        _target = (SubsceneManager)target;
     }
     public override void OnInspectorGUI()
     {

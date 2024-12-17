@@ -4,9 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-    public class IntensityManager : MonoBehaviour
+    public class SubsceneManager : MonoBehaviour
 {
-    public static IntensityManager instance = null;
+    public static SubsceneManager instance = null;
 
     [SerializeField]
     private List<GameObject> _subscenes = new List<GameObject>();
@@ -14,22 +14,22 @@ using UnityEngine.SceneManagement;
 
     private void Awake()
     {        
-        Init();                                         // initialize singleton
+        Init();                                   // initialize singleton
 
         foreach (GameObject scene in _subscenes)  // disabling all the scenes
         {
             scene.SetActive(false);
         }
-        IncrementIntensity(0);                          // basically, enables the first scene so the user can play
+        IncrementIntensity(0);                    // basically, enables the first scene so the user can play
     }
     /// <summary>
     /// Instantiates singleton
     /// </summary>
     private void Init()
     {
-        if(IntensityManager.instance == null)
+        if(SubsceneManager.instance == null)
         {
-            IntensityManager.instance = this;
+            SubsceneManager.instance = this;
         }
         else
         {

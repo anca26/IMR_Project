@@ -9,11 +9,11 @@ public class PlayerLogic : MonoBehaviour
     {
         if (other.gameObject.CompareTag("AdvanceIntensity"))
         {
-            IntensityManager.instance.IncrementIntensity(1);
+            SubsceneManager.instance.IncrementIntensity(1);
         }
         else if (other.gameObject.CompareTag("ExitPhobia"))
         {
-            IntensityManager.instance.ExitPhobia();
+            SubsceneManager.instance.ExitPhobia();
         }
         
     }
