@@ -96,7 +96,7 @@ public class IntensityManager : MonoBehaviour
         for (int i = 0; i < _intensityEvents.Count; ++i)
         {
             var elem = _intensityEvents[i];
-            if (elem.Found == false)
+            if (elem.Found == false || elem.instance == null)
             {
                 _intensityEvents.Remove(elem);
                 --i;

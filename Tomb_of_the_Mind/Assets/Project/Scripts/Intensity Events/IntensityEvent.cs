@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class IntensityEvent : MonoBehaviour
 {
+    [SerializeField]
+    protected bool _destroyOnNoTriggers;
     // After how much time should this event get triggered
     public float StartDelay{ private get; set; }
 
@@ -36,7 +38,10 @@ public abstract class IntensityEvent : MonoBehaviour
     {
         if(_remainingTriggers != 0)
         {
-            Destroy(gameObject);
+            if (_destroyOnNoTriggers)
+                Destroy(gameObject);
+            else
+                this.enabled = false;
         }
 
         if (Time.time >= _nextTriggerTime)
