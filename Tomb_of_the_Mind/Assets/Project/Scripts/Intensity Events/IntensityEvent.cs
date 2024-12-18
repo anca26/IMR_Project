@@ -36,7 +36,7 @@ public abstract class IntensityEvent : MonoBehaviour
      */
     public void TriggerEvent()
     {
-        if(_remainingTriggers != 0)
+        if(_remainingTriggers == 0)
         {
             if (_destroyOnNoTriggers)
                 Destroy(gameObject);

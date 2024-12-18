@@ -17,7 +17,5 @@ public class AnimatorEvent : IntensityEvent
         _animator.Play(_animationNames[_currentAnimation]);
         _currentAnimation += 1;
         _currentAnimation %= _animationNames.Count;
-
-
     }
 }
