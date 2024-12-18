@@ -119,17 +119,18 @@ public class WanderingSpiderLogic : MonoBehaviour
             }
         }
         // if there is a wall in front, we stop moving
-        if(Physics.Raycast(rayOrigin,-transform.forward,0.01f))
+        float forwardDist = 0.1f;
+        if(Physics.Raycast(rayOrigin,-transform.forward, forwardDist))
         {
             _stopTime = Time.time;
             return false;
         }
-        if (Physics.Raycast(rayOrigin + transform.right * _headingDirectionWidth / 2f, -transform.forward, 0.01f))
+        if (Physics.Raycast(rayOrigin + transform.right * _headingDirectionWidth / 2f, -transform.forward, forwardDist))
         {
             _stopTime = Time.time;
             return false;
         }
-        if (Physics.Raycast(rayOrigin - transform.right * _headingDirectionWidth / 2f, -transform.forward, 0.01f))
+        if (Physics.Raycast(rayOrigin - transform.right * _headingDirectionWidth / 2f, -transform.forward, forwardDist))
         {
             _stopTime = Time.time;
             return false;
