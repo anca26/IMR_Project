@@ -10,18 +10,30 @@ using UnityEngine.SceneManagement;
     public static SubsceneManager instance = null;
 
     [SerializeField]
+    public Animator canvasAnimator;
+
+    [SerializeField]
     private List<GameObject> _subscenes = new List<GameObject>();
     private int _currentSubScene = 0;
 
+    private float _intensityTransitionTime = 1f;
+
+    private Coroutine _currentCoroutine = null;
+
     private void Awake()
-    {        
+    {
         Init();                                   // initialize singleton
 
         foreach (GameObject scene in _subscenes)  // disabling all the scenes
         {
             scene.SetActive(false);
         }
+        canvasAnimator.Play("Fade_Still");
+
+        _subscenes[0].SetActive(true);
+
         IncrementIntensity(0);                    // basically, enables the first scene so the user can play
+
     }
     /// <summary>
     /// Instantiates singleton
@@ -43,6 +55,20 @@ using UnityEngine.SceneManagement;
     }
     public void IncrementIntensity(int amount)
     {
+        if(_currentCoroutine == null)
+            _currentCoroutine = StartCoroutine(IncrementIntensityI(amount));
+    }
+    public IEnumerator IncrementIntensityI(int amount)
+    {
+        if(canvasAnimator == null)
+        {
+            Debug.LogError("[ERR] NO CANVAS ANIMATOR ON SUBSCENE MANAGER");
+        }  
+      
+        if(amount != 0)
+            canvasAnimator.Play("Fade_Out");
+        yield return new WaitForSeconds(_intensityTransitionTime);
+        
         _subscenes[_currentSubScene].SetActive(false); // disabling previous intensity subscene
 
         _currentSubScene += amount;
@@ -50,10 +76,18 @@ using UnityEngine.SceneManagement;
         {
             _currentSubScene = _subscenes.Count - 1;
             Debug.LogWarning($"Reached max intensity. Can't incrase further than {_currentSubScene + 1}");
-            return;
+
+            yield return null;
         }
 
         _subscenes[_currentSubScene].SetActive(true);  // enabling new intensity subscene
+
+        if (amount != 0)      
+            yield return new WaitForSeconds(_intensityTransitionTime);
+
+        canvasAnimator.Play("Fade_In");
+
+        _currentCoroutine = null;
     }
     private GameObject CreateChild(Transform parent, string name)
     {
