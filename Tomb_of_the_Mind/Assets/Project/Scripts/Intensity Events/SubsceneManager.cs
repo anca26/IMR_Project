@@ -51,8 +51,10 @@ using UnityEngine.SceneManagement;
     }
     public void ExitPhobia()
     {
-        SceneManager.LoadScene(0); // loads door scene
+        //SceneManager.LoadScene(0); // loads door scene
+        SceneManager.LoadScene("RoomsScene");
     }
+
     public void IncrementIntensity(int amount)
     {
         if(_currentCoroutine == null)
