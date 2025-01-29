@@ -24,7 +24,9 @@ public class SubsceneManager : MonoBehaviour
 
     private Coroutine _currentCoroutine = null;
 
-    private List<AudioSource> _audioSources = new List<AudioSource>();
+    private List<AudioSource> _audioSources;
+    private List<float> _initialVolumes;
+    private float _multiplySpeed = 1.1f;
 
     private void Awake()
     {
@@ -46,6 +48,8 @@ public class SubsceneManager : MonoBehaviour
     /// </summary>
     private void Init()
     {
+        
+
         if(SubsceneManager.instance == null)
         {
             SubsceneManager.instance = this;
@@ -65,12 +69,30 @@ public class SubsceneManager : MonoBehaviour
     public IEnumerator ExitPhobiaI()
     {
         canvasAnimator.Play("Fade_Out");
+        int iterations = 100;
+
+        float waitTime = 2.0f / 100;
+
+        while(iterations > 0)
+        {
+            _audioSources.ForEach(a => a.volume /= _multiplySpeed);
+
+            iterations--;
+            yield return new WaitForSeconds(waitTime);
+        }
+
         yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("RoomsScene");
     }
 
     public void IncrementIntensity(int amount)
     {
+        _audioSources = new List<AudioSource>(FindObjectsOfType<AudioSource>());
+        _initialVolumes = _audioSources.Select(t => t.volume).ToList();
+        if(amount == 0)
+        {
+            _audioSources.ForEach(t => t.volume = 0.0001f);
+        }
         if (_currentCoroutine == null)
             _currentCoroutine = StartCoroutine(IncrementIntensityI(amount));
     }
@@ -79,12 +101,27 @@ public class SubsceneManager : MonoBehaviour
         if(canvasAnimator == null)
         {
             Debug.LogError("[ERR] NO CANVAS ANIMATOR ON SUBSCENE MANAGER");
-        }  
-      
+        }
+        int iterations = 100;
+        float waitTime = _intensityTransitionTime / iterations;
         if(amount != 0)
+        {
             canvasAnimator.Play("Fade_Out");
-        yield return new WaitForSeconds(_intensityTransitionTime);
-        
+
+            iterations = 100;
+
+
+            while (iterations > 0)
+            {
+                _audioSources.ForEach(a => a.volume /= _multiplySpeed);
+
+                iterations--;
+                yield return new WaitForSeconds(waitTime);
+            }
+
+
+        }
+
         _subscenes[_currentSubScene].SetActive(false); // disabling previous intensity subscene
 
         _currentSubScene += amount;
@@ -99,8 +136,18 @@ public class SubsceneManager : MonoBehaviour
 
         _subscenes[_currentSubScene].SetActive(true);  // enabling new intensity subscene
 
-        if (amount != 0)      
-            yield return new WaitForSeconds(_intensityTransitionTime);
+        iterations = 100;
+
+        //if (amount != 0)      
+            while (iterations > 0)
+            {
+                for (int i = 0; i < _audioSources.Count; i++)
+                    _audioSources[i].volume = Mathf.Min(_multiplySpeed * _audioSources[i].volume, _initialVolumes[i]);
+
+                iterations--;
+                yield return new WaitForSeconds(waitTime);
+            }
+
 
         if(this._cameraObject != null)
         {
