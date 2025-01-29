@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Project/Scenes/BeesScene.unity
-    guid: 57475d3301f7ff94f815874347477789
-  - enabled: 1
     path: Assets/Project/Scenes/SpiderScene.unity
     guid: 3f53d6eda75fedc49981c205d1366831
+  - enabled: 1
+    path: Assets/Project/Scenes/BeesScene.unity
+    guid: 57475d3301f7ff94f815874347477789
   - enabled: 1
     path: Assets/Samples/XR Interaction Toolkit/2.6.3/Hands Interaction Demo/HandsDemoScene.unity
     guid: 3ff35cecbcc52cc42945cf531638a60a
