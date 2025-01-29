@@ -5,10 +5,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-    public class SubsceneManager : MonoBehaviour
+public class SubsceneManager : MonoBehaviour
 {
     public static SubsceneManager instance = null;
 
+    [SerializeField]
+    private GameObject _cameraObject;
     [SerializeField]
     public Animator canvasAnimator;
 
@@ -74,6 +76,14 @@ using UnityEngine.SceneManagement;
         _subscenes[_currentSubScene].SetActive(false); // disabling previous intensity subscene
 
         _currentSubScene += amount;
+
+        if(this._cameraObject != null)
+        {
+            Transform newTransformData = _subscenes[_currentSubScene].GetComponent<IntensityManager>().GetCameraTeleportData();
+            this._cameraObject.GetComponentInChildren<Camera>().transform.parent.position = newTransformData.position;
+            this._cameraObject.GetComponentInChildren<Camera>().transform.parent.rotation = newTransformData.rotation;
+        }
+
         if (_currentSubScene >= _subscenes.Count)
         {
             _currentSubScene = _subscenes.Count - 1;

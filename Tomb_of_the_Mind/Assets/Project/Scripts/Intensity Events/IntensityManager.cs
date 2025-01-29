@@ -7,6 +7,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class IntensityManager : MonoBehaviour
 {
     [SerializeField]
+    private Transform _cameraTeleportData;
+
+    [SerializeField]
     private List<EventInterface> _intensityEvents;
 
     [System.Serializable]
@@ -47,6 +50,10 @@ public class IntensityManager : MonoBehaviour
         {
             InitEvent(intensityEvent);
         }
+    }
+    public Transform GetCameraTeleportData()
+    {
+        return this._cameraTeleportData;
     }
     /// <summary>
     /// TRIES to trigger each event every frame.
