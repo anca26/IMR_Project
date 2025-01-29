@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class SubsceneManager : MonoBehaviour
 {
@@ -53,13 +54,20 @@ public class SubsceneManager : MonoBehaviour
     }
     public void ExitPhobia()
     {
+        StartCoroutine(ExitPhobiaI());
         //SceneManager.LoadScene(0); // loads door scene
+        
+    }
+    public IEnumerator ExitPhobiaI()
+    {
+        canvasAnimator.Play("Fade_Out");
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("RoomsScene");
     }
 
     public void IncrementIntensity(int amount)
     {
-        if(_currentCoroutine == null)
+        if (_currentCoroutine == null)
             _currentCoroutine = StartCoroutine(IncrementIntensityI(amount));
     }
     public IEnumerator IncrementIntensityI(int amount)
@@ -77,13 +85,6 @@ public class SubsceneManager : MonoBehaviour
 
         _currentSubScene += amount;
 
-        if(this._cameraObject != null)
-        {
-            Transform newTransformData = _subscenes[_currentSubScene].GetComponent<IntensityManager>().GetCameraTeleportData();
-            this._cameraObject.GetComponentInChildren<Camera>().transform.parent.position = newTransformData.position;
-            this._cameraObject.GetComponentInChildren<Camera>().transform.parent.rotation = newTransformData.rotation;
-        }
-
         if (_currentSubScene >= _subscenes.Count)
         {
             _currentSubScene = _subscenes.Count - 1;
@@ -96,6 +97,14 @@ public class SubsceneManager : MonoBehaviour
 
         if (amount != 0)      
             yield return new WaitForSeconds(_intensityTransitionTime);
+
+        if(this._cameraObject != null)
+        {
+            Transform newTransformData = _subscenes[_currentSubScene].GetComponent<IntensityManager>().GetCameraTeleportData();
+            this._cameraObject.transform.position = newTransformData.position;
+            this._cameraObject.transform.rotation = newTransformData.rotation;
+            Debug.Log("Changed camera position");
+        }
 
         canvasAnimator.Play("Fade_In");
 
