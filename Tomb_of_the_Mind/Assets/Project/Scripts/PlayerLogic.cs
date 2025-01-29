@@ -10,6 +10,7 @@ public class PlayerLogic : MonoBehaviour
         Debug.Log($"OnTriggerEnter called. Collided with: {other.gameObject.name}");
         if (other.gameObject.CompareTag("AdvanceIntensity"))
         {
+            Destroy(other.gameObject);
             Debug.Log("AdvanceIntensity trigger detected. Incrementing intensity by 1.");
             SubsceneManager.instance.IncrementIntensity(1);
         }
