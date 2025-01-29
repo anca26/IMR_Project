@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class SubsceneManager : MonoBehaviour
     private float _intensityTransitionTime = 1f;
 
     private Coroutine _currentCoroutine = null;
+
+    private List<AudioSource> _audioSources = new List<AudioSource>();
 
     private void Awake()
     {
@@ -54,6 +57,7 @@ public class SubsceneManager : MonoBehaviour
     }
     public void ExitPhobia()
     {
+        _audioSources = new List<AudioSource>(FindObjectsOfType<AudioSource>());
         StartCoroutine(ExitPhobiaI());
         //SceneManager.LoadScene(0); // loads door scene
         
