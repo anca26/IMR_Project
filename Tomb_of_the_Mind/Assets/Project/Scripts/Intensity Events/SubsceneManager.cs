@@ -155,7 +155,8 @@ public class SubsceneManager : MonoBehaviour
             this._cameraObject.transform.position = newTransformData.position;
             this._cameraObject.transform.rotation = newTransformData.rotation;
             Debug.Log("Changed camera position");
-        }
+            Debug.Log($"New camera position: {newTransformData.position}");
+        } else { Debug.Log("No camera object found"); }
 
         canvasAnimator.Play("Fade_In");
 
