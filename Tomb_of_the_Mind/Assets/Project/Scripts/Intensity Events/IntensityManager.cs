@@ -44,7 +44,7 @@ public class IntensityManager : MonoBehaviour
     /// <summary>
     /// Initializez all the events.
     /// </summary>
-    private void Awake()
+    private void OnEnable()
     {
         foreach (EventInterface intensityEvent in this._intensityEvents)
         {
