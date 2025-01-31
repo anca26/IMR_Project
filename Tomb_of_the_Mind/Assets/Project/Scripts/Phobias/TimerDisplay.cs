@@ -6,23 +6,9 @@ public class TimerDisplay : MonoBehaviour
 {
     public TextMeshProUGUI timerText; 
     public GameObject[] objectsToShow;
-    public static TimerDisplay Instance;
     private float remainingTime;
 
-    
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject); 
-        }
-    }
-    void Start()
+    void OnEnable()
     {
         StartNewTimer(15); 
     }
